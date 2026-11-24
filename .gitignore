@@ -1,0 +1,9 @@
+.env
+vendor/
+outputs/
+work/
+*.log
+*.dmp
+*.pid
+*.zip
+Thumbs.db

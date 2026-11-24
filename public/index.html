@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1f6f78"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="stylesheet" href="styles.css">
+  <title>MedControl</title>
+</head>
+<body>
+  <div id="toast" class="toast" role="status"></div>
+  <div id="authView" class="auth-shell">
+    <div class="auth-brand"><span class="brand-mark">＋</span><span>Med<span>Control</span></span></div>
+    <div class="auth-card">
+      <p class="eyebrow">Seu tratamento, no seu ritmo</p><h1>Cuide da sua rotina de saúde.</h1><p class="muted">Organize horários, estoque e gastos em um só lugar.</p>
+      <div class="auth-tabs"><button class="tab active" data-auth="login">Entrar</button><button class="tab" data-auth="register">Criar conta</button></div>
+      <form id="authForm"><div id="nameField" class="field hidden"><label>Seu nome<input name="name" autocomplete="name" placeholder="Como podemos chamar você?"></label></div><div class="field"><label>E-mail<input name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label></div><div class="field"><label>Senha<input name="password" type="password" autocomplete="current-password" required placeholder="Mínimo de 8 caracteres"></label></div><button class="primary wide" type="submit"><span id="authSubmit">Entrar na conta</span><span class="spinner hidden"></span></button><p id="authHint" class="form-hint">Use sua conta para sincronizar os dados.</p></form>
+    </div><p class="auth-foot">Seus dados são privados e protegidos.</p>
+  </div>
+  <div id="appView" class="app hidden">
+    <header class="topbar"><div><div class="brand"><span class="brand-mark small">＋</span><span>Med<span>Control</span></span></div><p id="greeting" class="muted small-text">Bom dia</p></div><div class="top-actions"><button id="installBtn" class="icon-btn hidden" aria-label="Instalar aplicativo">⇩</button><button id="profileBtn" class="avatar" aria-label="Abrir perfil">AM</button></div></header>
+    <main id="main" class="main-content">
+      <section id="dashboardPage" class="page"><div class="page-heading"><div><p class="eyebrow">Visão geral</p><h1>Olá, <span id="userName">você</span> <span class="wave">✦</span></h1></div><button id="notifyBtn" class="notify-card"><span class="bell">♧</span><span><b>Ative os lembretes</b><small>Não perca um horário</small></span><span>›</span></button></div>
+        <div class="hero-card"><div><p class="hero-kicker">Resumo de hoje</p><h2 id="todayStatus">Tudo sob controle</h2><p id="todaySub">Acompanhe seus próximos horários.</p></div><div class="hero-orb">✚</div></div>
+        <div class="stats-grid"><div class="stat-card teal"><span class="stat-icon">◒</span><strong id="statMeds">0</strong><span>medicamentos</span></div><div class="stat-card blue"><span class="stat-icon">⌁</span><strong id="statInUse">0</strong><span>em uso</span></div><div class="stat-card orange"><span class="stat-icon">◷</span><strong id="statLow">0</strong><span>estoque baixo</span></div><div class="stat-card purple"><span class="stat-icon">▣</span><strong id="statSpend">R$ 0</strong><span>gastos no mês</span></div></div>
+        <div class="section-title"><h2>Próximos horários</h2><button class="text-btn" data-page="schedule">Ver agenda</button></div><div id="scheduleList" class="schedule-list"></div>
+        <div class="section-title"><h2>Estoque e validade</h2><button class="text-btn" data-page="medications">Ver tudo</button></div><div id="attentionList" class="attention-list"></div>
+      </section>
+      <section id="medicationsPage" class="page hidden"><div class="page-heading"><div><p class="eyebrow">Sua rotina</p><h1>Medicamentos</h1></div><button class="primary compact" id="addMedicationBtn">＋ Adicionar</button></div><div class="search"><span>⌕</span><input id="medSearch" placeholder="Buscar medicamento..."></div><div id="medicationList" class="medication-list"></div></section>
+      <section id="schedulePage" class="page hidden"><div class="page-heading"><div><p class="eyebrow">Hoje, <span id="dateLabel"></span></p><h1>Agenda do dia</h1></div></div><div id="fullScheduleList" class="timeline"></div></section>
+      <section id="financePage" class="page hidden"><div class="page-heading"><div><p class="eyebrow">Visão financeira</p><h1>Gastos</h1></div><button class="primary compact" id="addPurchaseBtn">＋ Compra</button></div><div class="finance-card"><div><span class="muted">Total este mês</span><strong id="financeTotal">R$ 0,00</strong></div><div class="bar-chart" id="barChart"></div></div><div class="section-title"><h2>Compras recentes</h2></div><div id="purchaseList" class="purchase-list"></div></section>
+      <section id="settingsPage" class="page hidden"><div class="page-heading"><div><p class="eyebrow">Preferências</p><h1>Configurações</h1></div></div><div class="settings-list"><button id="settingsNotify" class="setting-row"><span class="setting-icon teal-bg">♧</span><span><b>Notificações</b><small>Horários, estoque e validade</small></span><span class="chevron">›</span></button><button class="setting-row"><span class="setting-icon blue-bg">♙</span><span><b>Minha conta</b><small id="accountEmail">Conta sincronizada</small></span><span class="chevron">›</span></button><button id="logoutBtn" class="setting-row danger"><span class="setting-icon red-bg">↪</span><span><b>Sair da conta</b><small>Encerrar sessão neste dispositivo</small></span><span class="chevron">›</span></button></div><div id="adminPanel" class="admin-panel hidden"><div class="section-title"><h2>Central administrativa</h2><span class="badge">ADMIN</span></div><button id="adminNotifyBtn" class="setting-row"><span class="setting-icon purple-bg">✦</span><span><b>Enviar comunicado</b><small>Notificar usuários por Push</small></span><span class="chevron">›</span></button><div id="vapidStatus" class="vapid-status">Verificando integração VAPID…</div></div></section>
+    </main>
+    <nav class="bottom-nav"><button class="nav-item active" data-page="dashboard"><span>⌂</span><small>Início</small></button><button class="nav-item" data-page="medications"><span>▣</span><small>Remédios</small></button><button class="nav-item" data-page="schedule"><span>◷</span><small>Agenda</small></button><button class="nav-item" data-page="finance"><span>◈</span><small>Gastos</small></button><button class="nav-item" data-page="settings"><span>☼</span><small>Mais</small></button></nav>
+  </div>
+  <div id="modalRoot"></div>
+  <script src="app.js"></script>
+</body>
+</html>

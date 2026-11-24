@@ -1,0 +1,13 @@
+{
+  "name": "MedControl — Controle de medicamentos",
+  "short_name": "MedControl",
+  "description": "Organize horários, estoque e gastos dos seus medicamentos.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#1f6f78",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
